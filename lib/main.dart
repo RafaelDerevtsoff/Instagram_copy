@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
           primaryColorLight: Colors.white, primaryColorDark: Colors.black
           // primarySwatch: Colors.blue,
           ),
-      home: const MyHomePage(title: 'Instagram'),
+      home: const MyHomePage(title: "title"),
     );
   }
 }
@@ -31,82 +31,114 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  int currentPage = 0;
+  List<Widget> screens = const[ Text("Home"),Text("search"),Text("Reels"),Text("Shop"),Text("Profile")];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-            child: Image.asset(
-              'assets/images/Logo.png',
-              width: 100,
-              height: 80,
-            ),
-          ),
-          const SizedBox(
-            width: 190,
-          ),
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              child: IconButton(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                  onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text("text creiating new Post!"))),
-                  icon: const Icon(
-                    Icons.add_box_outlined,
-                    color: Colors.black,
-                  )),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Flexible(
-            child: IconButton(
-                padding: const EdgeInsets.all(0.0),
-                onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Activity history!"))),
-                icon: const Icon(
-                  Icons.heart_broken,
-                  color: Colors.black,
-                )),
-          ),
-          const SizedBox(width: 10),
-          Flexible(
-            child: IconButton(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                onPressed: () => ScaffoldMessenger.of(context)
-                    .showSnackBar(const SnackBar(content: Text("Chats!"))),
-                icon: const Icon(
-                  Icons.chat,
-                  color: Colors.black,
-                )),
-          ),
-        ]),
+        title: const Header(),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      body: screens[currentPage],
+
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              blurStyle: BlurStyle.outer,
+              color: Colors.black,
+              blurRadius: 5,
+            ),
+          ],
+        ),
+        child: BottomNavigationBar(
+
+
+          unselectedItemColor: Colors.black,
+          elevation: 10,
+          currentIndex: currentPage,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
+          onTap: onTabTapped,
+          items: const [
+            BottomNavigationBarItem(label: "", icon: Icon(Icons.home)),
+            BottomNavigationBarItem(label: "", icon: Icon(Icons.search_rounded)),
+            BottomNavigationBarItem(
+                label: "", icon: Icon(Icons.play_circle_sharp)),
+            BottomNavigationBarItem(
+                label: "", icon: Icon(Icons.shopping_bag_outlined)),
+            BottomNavigationBarItem(label: "", icon: ProfilePhoto())
+          ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(label: "", icon: Icon(Icons.home)),
-          BottomNavigationBarItem(label: "", icon: Icon(Icons.search_rounded)),
-          BottomNavigationBarItem(
-              label: "", icon: Icon(Icons.play_circle_sharp)),
-          BottomNavigationBarItem(
-              label: "", icon: Icon(Icons.shopping_bag_outlined)),
-          BottomNavigationBarItem(label: "", icon: ProfilePhoto())
-        ],
-      ),
     );
+  }
+  void onTabTapped(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      Padding(
+        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+        child: Image.asset(
+          'assets/images/Logo.png',
+          width: 100,
+          height: 80,
+        ),
+      ),
+      const SizedBox(
+        width: 190,
+      ),
+      Flexible(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+          child: IconButton(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("text creating new Post!"))),
+              icon: const Icon(
+                Icons.add_box_outlined,
+                color: Colors.black,
+              )),
+        ),
+      ),
+      const SizedBox(
+        width: 10,
+      ),
+      Flexible(
+        child: IconButton(
+            padding: const EdgeInsets.all(0.0),
+            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text("Activity history!"))),
+            icon: const Icon(
+              Icons.heart_broken,
+              color: Colors.black,
+            )),
+      ),
+      const SizedBox(width: 10),
+      Flexible(
+        child: IconButton(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            onPressed: () => ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text("Chats!"))),
+            icon: const Icon(
+              Icons.chat,
+              color: Colors.black,
+            )),
+      ),
+    ]);
   }
 }
 
