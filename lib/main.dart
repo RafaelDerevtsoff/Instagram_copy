@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 80,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 190,
           ),
           Flexible(
@@ -61,12 +61,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   )),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Flexible(
             child: IconButton(
-                padding: EdgeInsets.all(0.0),
+                padding: const EdgeInsets.all(0.0),
                 onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Activity history!"))),
                 icon: const Icon(
@@ -74,10 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Colors.black,
                 )),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Flexible(
             child: IconButton(
-                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                 onPressed: () => ScaffoldMessenger.of(context)
                     .showSnackBar(const SnackBar(content: Text("Chats!"))),
                 icon: const Icon(
