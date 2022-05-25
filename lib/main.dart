@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_copy/components/post.dart';
+
+import 'components/ProfilePhoto.dart';
+import 'components/header.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,15 +20,27 @@ class MyApp extends StatelessWidget {
           primaryColorLight: Colors.white, primaryColorDark: Colors.black
           // primarySwatch: Colors.blue,
           ),
-      home: const MyHomePage(title: "title"),
+      home: Swipe(),
+    );
+  }
+}
+
+class Swipe extends StatelessWidget {
+   Swipe({Key? key}) : super(key: key);
+  final _controller = PageController(initialPage: 0);
+  @override
+  Widget build(BuildContext context) {
+
+    return PageView(
+      controller: _controller,
+      children: const [MyHomePage(),Scaffold(body: Text("aa"),)],
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -32,7 +48,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentPage = 0;
-  List<Widget> screens = const[ Text("Home"),Text("search"),Text("Reels"),Text("Shop"),Text("Profile")];
+  List<Widget> screens = [ const PostItem(),const Text("search"),const Text("Reels"),const Text("Shop"),const Text("Profile")];
   
   @override
   Widget build(BuildContext context) {
@@ -53,17 +69,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         child: BottomNavigationBar(
-
-
-          unselectedItemColor: Colors.black,
+          selectedItemColor: Colors.black,
           elevation: 10,
           currentIndex: currentPage,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           type: BottomNavigationBarType.fixed,
           onTap: onTabTapped,
-          items: const [
-            BottomNavigationBarItem(label: "", icon: Icon(Icons.home)),
+          items:  const [
+            BottomNavigationBarItem(label: "", icon: Icon(Icons.home_outlined)),
             BottomNavigationBarItem(label: "", icon: Icon(Icons.search_rounded)),
             BottomNavigationBarItem(
                 label: "", icon: Icon(Icons.play_circle_sharp)),
@@ -82,80 +96,4 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Header extends StatelessWidget {
-  const Header({
-    Key? key,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(children: [
-      Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: Image.asset(
-          'assets/images/Logo.png',
-          width: 100,
-          height: 80,
-        ),
-      ),
-      const SizedBox(
-        width: 190,
-      ),
-      Flexible(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          child: IconButton(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-              onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text("text creating new Post!"))),
-              icon: const Icon(
-                Icons.add_box_outlined,
-                color: Colors.black,
-              )),
-        ),
-      ),
-      const SizedBox(
-        width: 10,
-      ),
-      Flexible(
-        child: IconButton(
-            padding: const EdgeInsets.all(0.0),
-            onPressed: () => ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Activity history!"))),
-            icon: const Icon(
-              Icons.heart_broken,
-              color: Colors.black,
-            )),
-      ),
-      const SizedBox(width: 10),
-      Flexible(
-        child: IconButton(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-            onPressed: () => ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text("Chats!"))),
-            icon: const Icon(
-              Icons.chat,
-              color: Colors.black,
-            )),
-      ),
-    ]);
-  }
-}
-
-class ProfilePhoto extends StatelessWidget {
-  const ProfilePhoto({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 30.0,
-      height: 30.0,
-      decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            fit: BoxFit.fill,
-            image: AssetImage("assets/images/profile.jpg"),
-          )),
-    );
-  }
-}
