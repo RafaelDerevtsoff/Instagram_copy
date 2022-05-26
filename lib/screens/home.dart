@@ -17,3 +17,16 @@ class _FeedScreenState extends State<FeedScreen> {
 Future<void> onRefresh() async {
   return Future.delayed(Duration(seconds: 2));
 }
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+}

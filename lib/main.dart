@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_copy/components/post.dart';
+import 'package:instagram_copy/screens/home.dart';
 
 import 'components/ProfilePhoto.dart';
 import 'components/header.dart';
@@ -48,15 +48,16 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int currentPage = 0;
-  List<Widget> screens = [ const PostItem(),const Text("search"),const Text("Reels"),const Text("Shop"),const Text("Profile")];
+  List<Widget> screens = [ Home(),const Text("search"),const Text("Reels"),const Text("Shop"),const Text("Profile")];
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: const Header(),
       ),
-      body: screens[currentPage],
+      body: SingleChildScrollView(child: screens[currentPage]),
 
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -95,5 +96,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 }
+
+
+
 
 
