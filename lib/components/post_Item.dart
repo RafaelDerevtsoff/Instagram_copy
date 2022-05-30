@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_copy/components/ProfilePhoto.dart';
+import 'package:instagram_copy/screens/comments.dart';
 
 import '../animations/heart_animation_widget.dart';
 
@@ -33,7 +34,7 @@ class _PostItemState extends State<PostItem> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                const ProfilePhoto(),
+                const ProfilePhoto(width: 30 ,height: 30,profilePhotoPath: "assets/images/profile.jpg"),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -98,7 +99,11 @@ class _PostItemState extends State<PostItem> {
                 IconButton(
                   padding: const EdgeInsets.all(0),
                   icon: const Icon(Icons.chat),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState((){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CommentSection()));
+                    });
+                  },
                   color: Colors.black,
                 ),
                 IconButton(
@@ -168,10 +173,12 @@ class _PostItemState extends State<PostItem> {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       onTap: () => print("Go to profile"),
-                    ),Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: InkWell(child: Text(widget.description),onTap: () => print("Go to comments"),),
-                    )
+                    ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(2, 2, 0, 0),
+                        child: InkWell(child: Text(widget.description),onTap: () => print("Go to comments"),),
+                      ),
+
                   ],
                 ),
               ],
@@ -182,3 +189,5 @@ class _PostItemState extends State<PostItem> {
     );
   }
 }
+
+
