@@ -101,7 +101,7 @@ class _PostItemState extends State<PostItem> {
                   icon: const Icon(Icons.chat),
                   onPressed: () {
                     setState((){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const CommentSection()));
+                      Future.microtask(() => Navigator.push(context, MaterialPageRoute(builder: (context) => const CommentSection())));
                     });
                   },
                   color: Colors.black,

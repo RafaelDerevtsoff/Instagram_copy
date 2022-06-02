@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_copy/components/comment_item.dart';
+import 'package:instagram_copy/dtos/Comment.dart';
 
 class CommentSection extends StatefulWidget {
   const CommentSection({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _CommentSectionState extends State<CommentSection> {
           physics: const BouncingScrollPhysics(),
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
-            return  CommentItem();
+            return  CommentItem(comment: Comment("Rafael","assets/images/profile.jpg",1,"comentario muito top bla hgsygasyasyas sbhggs8adgasibd a bsabdsaudhuisd ioasdisaiod jsaopdksad kaspdkopaskdopas opkasd opkasd opkasodk as kdasopd askopsak jsauhsuhsauhshua ashuashushuhsuhua ashusha"),);
           },
         ),
       ),
